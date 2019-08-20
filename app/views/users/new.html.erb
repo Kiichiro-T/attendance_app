@@ -1,24 +1,11 @@
 <% provide(:title, "サインアップ") %>
+<% provide(:url, signup_path) %>
+<% provide(:button_text, "マイアカウントを作成！") %>
+
 <h1>サインアップ</h1>
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <%= form_for(@user, url: signup_path) do |f| %> <%#フォーム内容の送信先を設定%>
-      <%= render 'shared/error_messages' %>
-      
-      <%= f.label :name, "名前" %>
-      <%= f.text_field :name, class: "form-control" %>
-      
-      <%= f.label :email, "メールアドレス" %>
-      <%= f.email_field :email, class: "form-control" %>
-      
-      <%= f.label :password, "パスワード" %>
-      <%= f.password_field :password, class: "form-control" %>
-      
-      <%= f.label :password_confirmation, "確認用パスワード" %>
-      <%= f.password_field :password_confirmation, class: "form-control" %>
-      
-      <%= f.submit "マイアカウントを作成！", class: "btn btn-primary" %>
-    <% end %>
+    <%= render 'form' %>
   </div>
 </div>
