@@ -1,0 +1,7 @@
+こんにちは！ <%= @user.name %>さん
+
+ようこそ AA (Atendance Aplication) へ！
+アカウント完成までもう少しです。
+下記のリンクをクリックしてアカウントを有効化してください：
+
+<%= edit_account_activation_url(@user.activation_token, email: @user.email) %>
