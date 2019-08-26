@@ -76,4 +76,12 @@ class UserTest < ActiveSupport::TestCase
   test "authenticated? should return false for a user with nil digest" do
     assert_not @user.authenticated?(:remember, '')
   end
+  
+  test "associated microposts should be destroyed" do
+    @user.save
+    @user.events.create!(event: "夏合宿", date: Time.zone.now, memo: "夏合宿は8/3~8/9です。")
+    assert_difference 'Event.count', -1 do
+      @user.destroy
+    end
+  end
 end

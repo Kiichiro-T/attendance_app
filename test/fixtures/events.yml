@@ -1,0 +1,20 @@
+summer:
+  event: "夏合宿"
+  date: 2019-08-13 06:21:41
+  memo: "夏合宿は8/3~8/9です。"
+  created_at: <%= 10.days.ago %>
+  user: michael
+
+spring:
+  event: "春合宿"
+  date: 2019-02-12 06:21:41
+  memo: "春合宿は5日間です。"
+  created_at: <%= 100.days.ago %>
+  user: michael
+  
+most_recent:
+  event: "テスト"
+  date: 2019-08-26 06:21:41
+  memo: "一番最近のイベント"
+  created_at: <%= Time.zone.now %>
+  user: michael

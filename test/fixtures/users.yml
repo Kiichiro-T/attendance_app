@@ -34,7 +34,6 @@ bob:
   activated: false
   activated_at: <%= Time.zone.now %>
 
-  
 <% 30.times do |n| %>
 user_<%= n %>:
   name:  <%= "User_#{n}" %>
