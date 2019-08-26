@@ -453,13 +453,17 @@
     date-fns "^1.29.0"
     http-call "^5.2.3"
 
-"@heroku-cli/plugin-webhooks-v5@^7.24.0":
-  version "7.24.0"
-  resolved "https://registry.yarnpkg.com/@heroku-cli/plugin-webhooks-v5/-/plugin-webhooks-v5-7.24.0.tgz#39beac4d8c3e0ff31f18ec399f4a02e9511a645c"
-  integrity sha512-TR7T7MXLDoWCP+b2+Bd7BUz7GG4ICZBHRjATDl0GtrrsROCgr/lnLdfhNRKuFYWgYVuBrXTyDHD9k5vzXUNQaw==
+"@heroku-cli/plugin-webhooks@^7.29.0":
+  version "7.29.0"
+  resolved "https://registry.yarnpkg.com/@heroku-cli/plugin-webhooks/-/plugin-webhooks-7.29.0.tgz#168481d44f8af1dea8074c4d576417b5011b0100"
+  integrity sha512-Vkd4RqvdgSooS4vIaqJ1AmDRLf7rXuK4tAH8KYtsG4RWp17gwkksoYVj+fCEfbOjUR2f16IFwGwG8eyUxyak8Q==
   dependencies:
-    "@heroku-cli/command" "^8.2.10"
-    heroku-cli-util "^8.0.11"
+    "@heroku-cli/color" "^1.1.14"
+    "@heroku-cli/command" "^8.2.11"
+    "@oclif/command" "^1"
+    "@oclif/config" "^1"
+    cli-ux "^5.2.1"
+    tslib "^1"
 
 "@heroku-cli/schema@^1.0.25":
   version "1.0.25"
@@ -3640,6 +3644,17 @@ handlebars@^4.1.0:
   optionalDependencies:
     uglify-js "^3.1.4"
 
+handlebars@^4.1.2:
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/handlebars/-/handlebars-4.1.2.tgz#b6b37c1ced0306b221e094fc7aca3ec23b131b67"
+  integrity sha512-nvfrjqvt9xQ8Z/w0ijewdD/vvWDTOweBUm96NTr66Wfvo1mJenBLwcYmPs3TIBP5ruzYGD7Hx/DaM9RmhroGPw==
+  dependencies:
+    neo-async "^2.6.0"
+    optimist "^0.6.1"
+    source-map "^0.6.1"
+  optionalDependencies:
+    uglify-js "^3.1.4"
+
 har-schema@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/har-schema/-/har-schema-2.0.0.tgz#a94c2224ebcac04782a0d9035521f24735b7ec92"
@@ -5087,6 +5102,11 @@ natural-orderby@^2.0.1:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/natural-orderby/-/natural-orderby-2.0.3.tgz#8623bc518ba162f8ff1cdb8941d74deb0fdcc016"
   integrity sha512-p7KTHxU0CUrcOXe62Zfrb5Z13nLvPhSWR/so3kFulUQU0sgUll2Z0LwpsLN351eOOD+hRGu/F1g+6xDfPeD++Q==
+
+neo-async@^2.6.0:
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.1.tgz#ac27ada66167fa8849a6addd837f6b189ad2081c"
+  integrity sha512-iyam8fBuCUpWeKPGpaNMetEocMt364qkCsfL9JuhjXX6dRnguRVOfk2GZaDpPjcOKiiXCPINZC1GczQ7iTq3Zw==
 
 netrc-parser@3.1.6, netrc-parser@^3.1.4, netrc-parser@^3.1.6:
   version "3.1.6"
