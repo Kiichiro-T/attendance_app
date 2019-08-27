@@ -4,7 +4,7 @@ class EventTest < ActiveSupport::TestCase
   
   def setup
     @user = users(:michael)
-    @event = @user.events.build(event: "夏合宿", date: Date.today, memo: "夏合宿は8/3~8/9です。")
+    @event = @user.events.build(event_name: "夏合宿", date: Date.today, memo: "夏合宿は8/3~8/9です。")
   end
   
   test "should be valid" do
@@ -16,13 +16,13 @@ class EventTest < ActiveSupport::TestCase
     assert_not @event.valid?
   end
   
-  test "event should be present" do
-    @event.event = "   "
+  test "event_name should be present" do
+    @event.event_name = "   "
     assert_not @event.valid?
   end
 
-  test "event should be at most 50 characters" do
-    @event.event = "a" * 51
+  test "event_name should be at most 50 characters" do
+    @event.event_name = "a" * 51
     assert_not @event.valid?
   end
   

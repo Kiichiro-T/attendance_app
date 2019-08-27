@@ -10,15 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_26_142010) do
+ActiveRecord::Schema.define(version: 2019_08_27_120834) do
 
   create_table "events", force: :cascade do |t|
-    t.string "event"
-    t.string "date"
+    t.string "event_name"
+    t.datetime "date"
     t.text "memo"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "picture"
     t.index ["user_id", "created_at"], name: "index_events_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_events_on_user_id"
   end

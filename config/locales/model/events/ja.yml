@@ -1,0 +1,9 @@
+ja:
+  activerecord:
+    models:
+      event: イベント
+    attributes:
+      event:
+        event_name: イベント名
+        date: 日付
+        memo: メモ 

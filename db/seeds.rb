@@ -24,12 +24,11 @@ end
 
 users = User.order(:created_at).take(2)
 40.times do |n|
-  event = "練習#{n}"
-  wd = ["日", "月", "火", "水", "木", "金", "土"]
-  d = n.days.ago
+  event_name = "練習#{n}"
+  date = n.days.ago.to_datetime
   memo = "楽しみましょう"
-  users.each { |user| user.events.create!(event: event,
-                                          date:  d.strftime("%Y/%m/%d(#{wd[d.wday]})"),
+  users.each { |user| user.events.create!(event_name: event_name,
+                                          date:  date,
                                           memo:  memo) }
 end
 

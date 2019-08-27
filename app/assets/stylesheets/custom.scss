@@ -202,23 +202,41 @@ input {
   padding: 0;
   li {
     padding: 10px 0;
-    border-top: 1px solid #e8e8e8;
+    margin-top: 5px;
+    border: 1px solid #e8e8e8;
+    border-radius: 10px;
   }
-  .user {
-    margin-top: 5em;
-    padding-top: 0;
-  }
-  .event {
+  .event_name {
     display: block;
     margin-left: 60px;
+    font-size: 1.5em;
   }
   .date {
     display: block;
     margin-left: 60px;
+    font-size: 1.2em;
   }
   .memo {
     display: block;
     margin-left: 60px;
+    font-size: 1.2em;
+  }
+  .picture {
+    display: block;
+    margin-left: 60px;
+    font-size: 1.2em;
+  }
+  .delete {
+    display: block;
+    margin-left: 60px;
+    font-size: 1.2em;
   }
   
+}
+
+aside {
+  textarea {
+    height: 100px;
+    margin-bottom: 5px;
+  }
 }

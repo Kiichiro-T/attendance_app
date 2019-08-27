@@ -1,0 +1,29 @@
+<%= form_for(@event) do |f| %>
+      <%= render 'shared/error_messages', object: f.object%>
+      <div class="field">
+      <%= f.label :event_name, "イベント名" %>
+      <%= f.text_field :event_name, class: "form-control", placeholder: "例）練習・旅行・飲み会" %>
+      
+      <%= f.label :date, "日付" %>
+      <%= f.date_field :date, class: "form-control" %>
+      
+      <%= f.label :memo, "メモ" %>
+      <%= f.text_area :memo, class: "form-control", placeholder: "例）集合時間・場所・持ち物・連絡先" %>
+      </div>
+      
+      <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+      
+      <span class="picture">
+        <%= f.label :picture, "写真" %>
+        <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
+      </span>
+<% end %>
+
+<script type="text/javascript">
+  $('#event_picture').bind('change', function() {
+    var size_in_megabytes = this.files[0].size/1024/1024;
+    if (size_in_megabytes > 5) {
+      alert('ファイルサイズの最大は5MBです。より小さいファイルを選択してください。');
+    }
+  });
+</script>

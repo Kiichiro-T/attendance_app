@@ -79,7 +79,7 @@ class UserTest < ActiveSupport::TestCase
   
   test "associated microposts should be destroyed" do
     @user.save
-    @user.events.create!(event: "夏合宿", date: Time.zone.now, memo: "夏合宿は8/3~8/9です。")
+    @user.events.create!(event_name: "夏合宿", date: Time.zone.now, memo: "夏合宿は8/3~8/9です。")
     assert_difference 'Event.count', -1 do
       @user.destroy
     end

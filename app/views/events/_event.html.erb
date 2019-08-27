@@ -1,5 +1,17 @@
 <li id="event-<%= event.id %>">
-  <span class="event">イベント名：<%= event.event %></span>
-  <span class="date">日時：<%= event.date %></span>
+  <span class="event_name"><%= link_to "イベント名：#{event.event_name}", '#' %></span>
+  <% d = event.date %>
+  <% wd = ["日", "月", "火", "水", "木", "金", "土"] %>
+  <span class="date">日時：<%= d.strftime("%Y/%m/%d(#{wd[d.wday]})") %></span>
   <span class="memo">メモ：<%= event.memo %></span>
+  <span class="picture">
+    <%= image_tag event.picture.url if event.picture? %>
+  </span>
+  
+  <span class="delete">
+    <% if current_user?(event.user) %>
+      <%= link_to "削除", event, method: :delete, 
+                                 data: { confirm: "本当に削除しますか？" } %>
+    <% end %>
+  </span>
 </li>
