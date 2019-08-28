@@ -1,6 +1,10 @@
 class EventsController < ApplicationController
-  before_action :logged_in_user, only: [:create, :destroy]
+  before_action :logged_in_user, only: [:new, :create, :destroy]
   before_action :correct_user,   only: :destroy
+  
+  def new
+    @event = current_user.events.build  if logged_in?
+  end
   
   def create
     @event = current_user.events.build(event_params)
@@ -9,7 +13,7 @@ class EventsController < ApplicationController
       redirect_to root_url
     else
       @feed_items = []
-      render 'static_pages/home'
+      render 'events/new'
     end
   end
   

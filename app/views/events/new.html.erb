@@ -1,0 +1,10 @@
+<% provide(:title, "新規イベント") %>
+<% provide(:button_text, "作成") %>
+<% provide(:url, events_path) %>
+<div class="row">
+  <aside class="col-md-6 col-md-offset-3">
+    <section class="event_form">
+      <h1>新規イベント</h1>
+      <%= render 'shared/event_form' %>
+    </section>
+  </aside>

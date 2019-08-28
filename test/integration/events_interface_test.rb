@@ -8,8 +8,8 @@ class EventsInterfaceTest < ActionDispatch::IntegrationTest
   
   test "event interface" do
     log_in_as(@user)
-    get root_path
-    assert_select 'div.pagination'
+    get new_event_path
+    assert_template 'events/new'
     assert_select 'input[type=file]'
     # 無効な送信
     assert_no_difference 'Event.count' do
