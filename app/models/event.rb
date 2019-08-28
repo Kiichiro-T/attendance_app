@@ -1,4 +1,5 @@
 class Event < ApplicationRecord
+  attribute :url_token, :string, default: SecureRandom.hex(10)
   belongs_to :user, optional: true
   default_scope -> { order(date: :desc) }
   mount_uploader :picture, PictureUploader
@@ -6,7 +7,13 @@ class Event < ApplicationRecord
   validates :date,    presence: true
   validates :memo,    length: { maximum: 1024 }
   validates :user_id, presence: true
+  validates :url_token, presence: true, uniqueness: true
   validate  :picture_size
+  
+  # eventモデルのidをランダムなものとする
+  def to_param
+    url_token
+  end
   
   private
     

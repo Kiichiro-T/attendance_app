@@ -4,6 +4,7 @@ summer:
   date: <%= Time.new(2019, 8, 3).to_datetime %>
   memo: "夏合宿は8/3~8/9です。"
   created_at: <%= Time.new(2019, 8, 2).to_datetime %>
+  url_token: <%= SecureRandom.hex(10) %>
   user: michael
 
 spring:
@@ -11,6 +12,7 @@ spring:
   date: <%= Time.new(2019, 2, 7).to_datetime %>
   memo: "春合宿は6日間です。"
   created_at: <%= Time.new(2019, 2, 6).to_datetime %>
+  url_token: <%= SecureRandom.hex(10) %>
   user: michael
   
 most_recent:
@@ -18,6 +20,7 @@ most_recent:
   date: <%= DateTime.now.to_datetime %>
   memo: "一番最近のイベント"
   created_at: <%= 10.minutes.ago.to_datetime %>
+  url_token: <%= SecureRandom.hex(10) %>
   user: michael
   
 fall:
@@ -25,6 +28,7 @@ fall:
   date: <%= Time.new(2018, 11, 20).to_datetime %>
   memo: "秋合宿は5日間です。"
   created_at: <%= Time.new(2018, 11, 15).to_datetime %>
+  url_token: <%= SecureRandom.hex(10) %>
   user: archer
   
 <% 30.times do |n| %>
@@ -33,5 +37,6 @@ event_<%= n+1 %>:
   date:  <%= (n+1).days.ago.to_datetime %>
   memo: "楽しみましょう"
   created_at: <%= (n+2).days.ago.to_datetime %>
+  url_token: <%= SecureRandom.hex(10) %>
   user: michael
 <% end %>

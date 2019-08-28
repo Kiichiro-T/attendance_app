@@ -36,7 +36,7 @@ class EventsInterfaceTest < ActionDispatch::IntegrationTest
     assert_select 'a', text: "削除"
     first_event = @user.events.paginate(page: 1).first
     assert_difference 'Event.count', -1 do
-      delete event_path(first_event)
+      delete event_path(first_event, url_token: first_event.url_token)
     end
     # 違うユーザーのプロフィールにアクセス（削除リンクがないことを確認）
     get user_path(users(:archer))

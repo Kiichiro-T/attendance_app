@@ -17,7 +17,7 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
   
   test "should redirect destroy when not logged in" do
     assert_no_difference 'Event.count' do
-      delete event_path(@event)
+      delete event_path(@event, url_token: @event.url_token)
     end
     assert_redirected_to login_url
   end
@@ -26,7 +26,7 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     log_in_as(users(:michael))
     event = events(:fall)
     assert_no_difference 'Event.count' do
-      delete event_path(event)
+      delete event_path(event, url_token: event.url_token)
     end
     assert_redirected_to root_url
   end

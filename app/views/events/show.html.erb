@@ -1,18 +1,3 @@
-<% provide(:title, "イベント一覧") %>
-<div class="row">
-  <aside class="col-md-4">
-    <section class="event_info">
-      <h1>
-        <%= "イベント一覧" %>
-      </h1>
-    </section>
-  </aside>
-  <div class="col-md-8">
-    <% if @user.events.any? %>
-      <ol class="events">
-        <%= render @events %>
-      </ol>
-      <%= will_paginate @events %>
-    <% end %>
-  </div>
-</div>
+<h1>Event_id: <%= @event.id %></h1>
+<p>Event_url_token: <%= @event.url_token %></p>
+<p>User_name: <%= @event.user.name %></p>

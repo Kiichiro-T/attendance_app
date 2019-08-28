@@ -17,6 +17,7 @@ gem 'turbolinks',     '5.0.1'
 gem 'jbuilder',       '2.7.0'
 gem "actionview",     ">= 5.1.6.2"
 gem 'rails-i18n'
+gem 'public_uid'
 
 
 group :development, :test do

@@ -1,5 +1,5 @@
 <li id="event-<%= event.id %>">
-  <span class="event_name"><%= link_to "イベント名：#{event.event_name}", '#' %></span>
+  <span class="event_name"><%= link_to "イベント名：#{event.event_name}", event_path(event, url_token: event.url_token) %></span>
   <% d = event.date %>
   <% wd = ["日", "月", "火", "水", "木", "金", "土"] %>
   <span class="date">日時：<%= d.strftime("%Y/%m/%d(#{wd[d.wday]})") %></span>
@@ -10,8 +10,9 @@
   
   <span class="delete">
     <% if current_user?(event.user) %>
-      <%= link_to "削除", event, method: :delete, 
-                                 data: { confirm: "本当に削除しますか？" } %>
+      <%= link_to "削除", event_path(event, url_token: event.url_token),
+                          method: :delete, 
+                          data: { confirm: "本当に削除しますか？" } %>
     <% end %>
   </span>
 </li>

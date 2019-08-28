@@ -28,7 +28,8 @@ users = User.order(:created_at).take(2)
   date = n.days.ago.to_datetime
   memo = "楽しみましょう"
   users.each { |user| user.events.create!(event_name: event_name,
-                                          date:  date,
-                                          memo:  memo) }
+                                          date:       date,
+                                          memo:       memo,
+                                          url_token:  SecureRandom.hex(10) ) }
 end
 
