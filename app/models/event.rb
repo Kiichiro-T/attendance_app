@@ -1,6 +1,8 @@
 class Event < ApplicationRecord
+  belongs_to :user #optional: true
+  has_many :answers, dependent: :destroy
+  has_many :answer_users, through: :answers, source: :user
   attribute :url_token, :string, default: SecureRandom.hex(10)
-  belongs_to :user, optional: true
   default_scope -> { order(date: :desc) }
   mount_uploader :picture, PictureUploader
   validates :event_name,   presence: true, length: { maximum: 50 }

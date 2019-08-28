@@ -3,7 +3,7 @@ require 'test_helper'
 class EventsInterfaceTest < ActionDispatch::IntegrationTest
   
   def setup
-    @user = users(:michael)
+    @user = users(:user1)
   end
   
   test "event interface" do
@@ -39,7 +39,7 @@ class EventsInterfaceTest < ActionDispatch::IntegrationTest
       delete event_path(first_event, url_token: first_event.url_token)
     end
     # 違うユーザーのプロフィールにアクセス（削除リンクがないことを確認）
-    get user_path(users(:archer))
+    get user_path(users(:user2))
     assert_select 'a', text: "削除", count: 0
   end
 end

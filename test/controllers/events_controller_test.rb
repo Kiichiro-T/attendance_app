@@ -3,7 +3,7 @@ require 'test_helper'
 class EventsControllerTest < ActionDispatch::IntegrationTest
   
   def setup
-    @event = events(:summer)
+    @event = events(:event_user1)
   end
   
   test "should redirect create when not logged in" do
@@ -22,9 +22,9 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to login_url
   end
   
-  test "should redirect destroy for wrong micropost" do
-    log_in_as(users(:michael))
-    event = events(:fall)
+  test "should redirect destroy for wrong event" do
+    log_in_as(users(:user1))
+    event = events(:event_user4)
     assert_no_difference 'Event.count' do
       delete event_path(event, url_token: event.url_token)
     end

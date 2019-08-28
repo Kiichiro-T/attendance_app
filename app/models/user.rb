@@ -1,5 +1,7 @@
 class User < ApplicationRecord
-  has_many :events, dependent: :destroy
+  has_many :events,  dependent: :destroy
+  has_many :answers, dependent: :destroy
+  has_many :answer_events, through: :answers, source: :event
   attr_accessor :remember_token, :activation_token, :reset_token
   before_save   :downcase_email
   before_create :create_activation_digest
@@ -69,7 +71,7 @@ class User < ApplicationRecord
      reset_sent_at < 2.hours.ago
    end
    
-   # 試作feedの定義
+  # 試作feedの定義
   # 完全な実装は次章の「ユーザーをフォローする」を参照
   def feed
     Event.where("user_id = ?", id)

@@ -3,8 +3,11 @@ require 'test_helper'
 class EventTest < ActiveSupport::TestCase
   
   def setup
-    @user = users(:michael)
-    @event = @user.events.build(event_name: "夏合宿", date: Date.today, memo: "夏合宿は8/3~8/9です。")
+    @user = users(:user1)
+    @event = @user.events.build(event_name: "夏合宿",
+                                date:       Date.today,
+                                memo:       "夏合宿は8/3~8/9です。",
+                                url_token:  SecureRandom.hex(10) )
   end
   
   test "should be valid" do
@@ -37,7 +40,19 @@ class EventTest < ActiveSupport::TestCase
   end
   
   test "order should be most recent first" do
-    assert_equal events(:most_recent), Event.first
+    assert_equal events(:event_user3), Event.first
+  end
+  
+  test "url_token should be present" do
+    @event.url_token = "   "
+    assert_not @event.valid?
+  end
+  
+  test "url_token should be unique" do
+    duplicate_event = @event.dup
+    duplicate_event.url_token = @event.url_token
+    @event.save
+    assert_not duplicate_event.valid?
   end
   
 end
