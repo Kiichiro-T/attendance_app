@@ -20,14 +20,16 @@ class EventsInterfaceTest < ActionDispatch::IntegrationTest
     assert_select 'div#error_explanation'
     # 有効な送信
     event_name = "練習"
-    date = DateTime.now.to_datetime
+    date = 1000.days.since.to_datetime
     memo = "テニスラケットが必要です。"
     picture = fixture_file_upload('test/fixtures/rails.png', 'image/png')
     assert_difference 'Event.count', 1 do
       post events_path, params: { event: { event_name: event_name,
                                            date:       date,
                                            memo:       memo,
-                                           picture:    picture } }
+                                           picture:    picture,
+                                           url_token:  SecureRandom.hex(10),
+                                           user_id:    @user.id} }
     end
     assert_redirected_to root_url
     follow_redirect!

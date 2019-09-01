@@ -1,6 +1,6 @@
 class AnswersController < ApplicationController
-  before_action :logged_in_user, only: [:new, :index]
-  before_action :set_event,      only: [:index, :new, :create, :edit, :update]
+  before_action :logged_in_user
+  before_action :set_event
   before_action :status_count,   only: [:index]
   before_action :correct_user_answer, only: [:edit, :update]
   

@@ -40,7 +40,7 @@ class EventTest < ActiveSupport::TestCase
   end
   
   test "order should be most recent first" do
-    assert_equal events(:event_user3), Event.first
+    assert_equal events(:event_user1), Event.first
   end
   
   test "url_token should be present" do
