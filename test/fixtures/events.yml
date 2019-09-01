@@ -1,8 +1,8 @@
 <% require "date" %>
 event_user1:
-  event_name: "夏合宿"
+  event_name: "旅行"
   date: <%= 100.days.since.to_datetime %>
-  memo: "夏合宿は8/3~8/9です。"
+  memo: "旅行は8/3~8/9です。"
   created_at: <%= Time.new(2019, 8, 2).to_datetime %>
   url_token: <%= SecureRandom.hex(10) %>
   user: user1

@@ -71,10 +71,9 @@ class User < ApplicationRecord
      reset_sent_at < 2.hours.ago
    end
    
-  # 試作feedの定義
-  # 完全な実装は次章の「ユーザーをフォローする」を参照
   def feed
-    Event.where("user_id = ?", id)
+    Event.joins(:answers).where("answers.user_id = ?", id).order("events.date DESC")# .or(Event.where("user_id = ?", id)) ユーザー本人のはまだ表示されない
+    
   end
   
   private

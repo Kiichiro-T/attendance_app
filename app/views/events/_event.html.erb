@@ -1,8 +1,11 @@
 <% @answer = Answer.where(["event_id = ? and user_id = ?", event.id, current_user.id]) %>
 <li id="event-<%= event.id %>">
   <span class="event_name">
-  <%= link_to "イベント名：#{event.event_name}", 
+  <%= link_to "イベント名： #{event.event_name}", 
                         event_answers_path(event_url_token: event.url_token) %>
+  
+  <%= link_to "イベント作成者： #{event.user.name}", 
+                        user_path(id: event.user.id) %>
   </span>
   <% d = event.date %>
   <% wd = ["日", "月", "火", "水", "木", "金", "土"] %>
@@ -20,11 +23,9 @@
   <% else %>
     <span class="has_answered"><%= link_to "回答変更", edit_event_answer_path(id: @answer.ids , event_url_token: event.url_token) %></span>
   <% end %>
-  <% if current_user.id == event.user_id %> 
+  <% if current_user?(event.user) %>
     <span class="event_edit"><%= link_to "イベント編集", edit_event_path(url_token: event.url_token) %></span>
-  <% end %>
-  <span class="delete">
-    <% if current_user?(event.user) %>
+    <span class="delete">
       <%= link_to "削除", event_path(event, url_token: event.url_token),
                           method: :delete, 
                           data: { confirm: "本当に削除しますか？" } %>

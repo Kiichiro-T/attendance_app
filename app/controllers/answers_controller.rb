@@ -45,6 +45,7 @@ class AnswersController < ApplicationController
       @event = Event.find_by(url_token: params[:event_url_token])
     end
     
+    # 各statusの数を返す
     def status_count
       @answers = @event.answers.paginate(page: params[:page])
       if @answers
@@ -57,6 +58,7 @@ class AnswersController < ApplicationController
       end
     end
     
+    # ユーザーがログイン中ならばそのanswerを返す
     def correct_user_answer
       @answer = current_user.answers.find_by(id: params[:id])
       if @answer.nil?

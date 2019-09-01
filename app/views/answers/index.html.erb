@@ -2,14 +2,14 @@
 <div class="row">
   <aside class="col-md-4">
     <section class="event_info">
-      <h1>イベント名:  <%= @event.event_name %></h1>
+      <h1>イベント名: <%= @event.event_name %></h1>
       <% d = @event.date %>
       <% wd = ["日", "月", "火", "水", "木", "金", "土"] %>
   　　<p>日付：<%= d.strftime("%Y/%m/%d(#{wd[d.wday]})") %></p>
       <% if !@event.memo.nil? %>
-        <p>コメント：　<%= @event.memo %></p>
+        <p>コメント： <%= @event.memo %></p>
       <% end %>
-      <p>作成者：　<%= @user.name %></p>
+      <p>作成者： <%= @user.name %></p>
     </section>
   </aside>
   <div class="col-md-8">

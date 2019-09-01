@@ -1,7 +1,7 @@
 <li id="answer-<%= answer.id %>">
   <%= link_to gravatar_for(answer.user, size: 50), answer.user %>
   <span class="user"><%= link_to answer.user.name, answer.user %></span>
-  
+  <div class="answer_status">
   <% if answer.status == 1 %>
     <span class="status_1">出欠状況：　○</span>
   <% elsif answer.status == 2 %>
@@ -9,8 +9,9 @@
     
     
   <% elsif answer.status == 3 %>
-    <span class="status_1">出欠状況：　×</span>
+    <span class="status_3">出欠状況：　×</span>
   <% end %>
+  </div>
   <span class="timestamp">
     <%= time_ago_in_words(answer.created_at) %>前に回答
   </span>

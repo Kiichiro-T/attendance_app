@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
-  before_action :logged_in_user, only: [:new, :create, :destroy]
-  before_action :correct_user_event,   only: [:show, :edit, :update, :destroy]
-  #before_action :set_event,      only: :show
+  before_action :logged_in_user
+  before_action :correct_user_event,   only: [:edit, :update, :destroy]
+  before_action :set_event,      only: :show
   
   def new
     @event = Event.new  if logged_in?
@@ -45,6 +45,7 @@ class EventsController < ApplicationController
       params.require(:event).permit(:event_name, :date, :memo, :picture, :url_token, :user_id)
     end
     
+    # ログイン中、本人しか操作できない
     def correct_user_event
       @event = current_user.events.find_by(url_token: params[:url_token])
       if @event.nil?
