@@ -55,4 +55,11 @@ class EventTest < ActiveSupport::TestCase
     assert_not duplicate_event.valid?
   end
   
+  test "associated answers should be destroyed" do
+    @event.save
+    @event.answers.create!(status: 1, user_id: @event.user.id)
+    assert_difference 'Answer.count', -1 do
+      @event.destroy
+    end
+  end
 end

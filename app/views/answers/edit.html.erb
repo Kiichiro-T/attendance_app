@@ -1,0 +1,11 @@
+<% provide(:title, "回答変更") %>
+<% provide(:url, event_answer_path(id: @answer.id, event_url_token: @event.url_token)) %>
+<% provide(:button_text, "変更を保存する") %>
+
+<h1>回答変更</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+   <%= render 'shared/answer_form' %>
+  </div>
+</div>

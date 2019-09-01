@@ -1,6 +1,10 @@
 <%= form_for(@event, url: yield(:url)) do |f| %>
       <%= render 'shared/error_messages', object: f.object%>
       <div class="field">
+      
+      <%= f.hidden_field :url_token, :value => SecureRandom.hex(10) %>
+      <%= f.hidden_field :user_id, :value => current_user.id %> 
+        
       <%= f.label :event_name, "イベント名" %>
       <%= f.text_field :event_name, class: "form-control", placeholder: "例）練習・旅行・飲み会" %>
       

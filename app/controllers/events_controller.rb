@@ -1,23 +1,35 @@
 class EventsController < ApplicationController
   before_action :logged_in_user, only: [:new, :create, :destroy]
-  before_action :correct_user,   only: :destroy
-  before_action :set_event,      only: :show
+  before_action :correct_user_event,   only: [:show, :edit, :update, :destroy]
+  #before_action :set_event,      only: :show
   
   def new
-    @event = current_user.events.build  if logged_in?
+    @event = Event.new  if logged_in?
   end
   
   def show
   end 
   
   def create
-    @event = current_user.events.build(event_params)
+    @event = Event.new(event_params)
     if @event.save
       flash[:success] = "イベントが作成されました"
       redirect_to root_url
     else
       @feed_items = []
       render 'events/new'
+    end
+  end
+  
+  def edit
+  end
+  
+  def update
+    if @event.update_attributes(event_params)
+      flash[:success] = "イベントの変更に成功しました"
+      redirect_to event_answers_url(event_url_token: @event.url_token)
+    else
+      render "events/edit"
     end
   end
   
@@ -30,12 +42,15 @@ class EventsController < ApplicationController
   private
     
     def event_params
-      params.require(:event).permit(:event_name, :date, :memo, :picture, :url_token)
+      params.require(:event).permit(:event_name, :date, :memo, :picture, :url_token, :user_id)
     end
     
-    def correct_user
+    def correct_user_event
       @event = current_user.events.find_by(url_token: params[:url_token])
-      redirect_to root_url if @event.nil?
+      if @event.nil?
+        flash[:danger] = "不正な操作です"
+        redirect_to root_url
+      end
     end
     
     def set_event

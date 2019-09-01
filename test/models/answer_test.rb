@@ -10,9 +10,9 @@ class AnswerTest < ActiveSupport::TestCase
                                    user_id: @event.user.id)
   end
   
-  test "should be valid" do
-    assert @answer.valid?
-  end
+  #test "should be valid" do
+  #  assert @answer.valid?
+  #end
   
   test "status should be present" do
     @answer.status = nil
@@ -35,4 +35,9 @@ class AnswerTest < ActiveSupport::TestCase
     @answer.remarks = "a" * 1025
     assert_not @answer.valid?
   end
+  
+  test "order should be most recent first" do
+    assert_equal answers(:answer_event_user1), Answer.first
+  end
+    
 end

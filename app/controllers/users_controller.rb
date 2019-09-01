@@ -10,6 +10,9 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @events = @user.events.paginate(page: params[:page])
+    @events.each do |event|
+      @answer = Answer.where(["event_id = ? and user_id = ?", event.id, event.user_id])
+    end
     redirect_to root_url and return unless @user.activated?
   end
   

@@ -12,6 +12,12 @@ $light-gray: #777;
   box-sizing:         border-box;
 }
 
+@mixin event_info {
+  display: block;
+  margin-left: 60px;
+  font-size: 1.2em;
+}
+
 /* universal */
 
 body {
@@ -212,24 +218,26 @@ input {
     font-size: 1.5em;
   }
   .date {
-    display: block;
-    margin-left: 60px;
-    font-size: 1.2em;
+    @include event_info;
   }
   .memo {
-    display: block;
-    margin-left: 60px;
-    font-size: 1.2em;
+    @include event_info;
   }
   .picture {
-    display: block;
-    margin-left: 60px;
-    font-size: 1.2em;
+    @include event_info;
   }
+  .has_answered {
+    @include event_info;
+  }
+  .will_answer {
+    @include event_info;
+  }
+  .event_edit {
+    @include event_info;
+  }
+  
   .delete {
-    display: block;
-    margin-left: 60px;
-    font-size: 1.2em;
+    @include event_info;
   }
   
 }
@@ -240,3 +248,48 @@ aside {
     margin-bottom: 5px;
   }
 }
+
+/* answers */
+
+.answers {
+  list-style: none;
+  padding: 0;
+  li {
+    padding: 10px 0;
+    border-top: 1px solid #e8e8e8;
+    border: 1px solid #e8e8e8;
+    border-radius: 10px;
+  }
+  .user {
+    display: block;
+    margin-left: 60px;
+    font-size: 1.5em;
+  }
+  .status {
+    display: block;
+    margin-left: 60px;
+    font-size: 1.5em;
+    img {
+      display: block;
+      padding: 5px 0;
+    }
+  }
+  .timestamp {
+    color: $gray-light;
+    display: block;
+    margin-left: 60px;
+  }
+  .gravatar {
+    float: left;
+    margin-right: 10px;
+    margin-top: 5px;
+    margin: 5px 10px 0 60px;
+  }
+}
+
+aside {
+  textarea {
+    height: 100px;
+    margin-bottom: 5px;
+  }
+ }

@@ -1,0 +1,20 @@
+<%= form_for(@answer, url: yield(:url)) do |f| %>
+      <%= render 'shared/error_messages', object: f.object%>
+      <div class="field">
+      
+      <%= f.hidden_field :user_id, :value => current_user.id %>
+      <%= f.hidden_field :event_id, :value => @event.id %>
+      
+      <%= f.label  :reason, "出欠状況" %>
+      <%= f.select :status, [["○", 1], ["△", 2], ["×", 3]], class: "form-control", :prompt => "選択してください" %>
+      
+      <%= f.label :reason, "理由" %>
+      <%= f.text_field :reason, class: "form-control", placeholder: "例）旅行・バイト・法事" %>
+      
+      <%= f.label :remarks, "備考" %>
+      <%= f.text_area :remarks, class: "form-control", placeholder: "例）1時間遅刻・来週分かる" %>
+      </div>
+      
+      <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+    
+<% end %>

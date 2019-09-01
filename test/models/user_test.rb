@@ -5,6 +5,8 @@ class UserTest < ActiveSupport::TestCase
   def setup
     @user = User.new(name: "Example User", email: "user@example.com",
                      password: "password", password_confirmation: "password")
+    @user1  = users(:user1)
+    @event1 = events(:event_user1)
   end
   
   test "should be valid" do
@@ -77,7 +79,7 @@ class UserTest < ActiveSupport::TestCase
     assert_not @user.authenticated?(:remember, '')
   end
   
-  test "associated microposts should be destroyed" do
+  test "associated events should be destroyed" do
     @user.save
     @user.events.create!(event_name: "夏合宿", date: Time.zone.now, memo: "夏合宿は8/3~8/9です。")
     assert_difference 'Event.count', -1 do

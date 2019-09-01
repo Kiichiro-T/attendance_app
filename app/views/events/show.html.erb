@@ -1,3 +1,9 @@
-<h1>Event_id: <%= @event.id %></h1>
-<p>Event_url_token: <%= @event.url_token %></p>
-<p>User_name: <%= @event.user.name %></p>
+<h1>イベント名: <%= @event.event_name %></h1>
+<p>イベント作成者： <%= @event.user.name %></p>
+<% d = @event.date %>
+<% wd = ["日", "月", "火", "水", "木", "金", "土"] %>
+<p>日付：<%= d.strftime("%Y/%m/%d(#{wd[d.wday]})") %></p>
+<p>
+  コメント：
+  <span><%= @event.memo %></span>
+</p>

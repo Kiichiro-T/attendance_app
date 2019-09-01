@@ -1,0 +1,9 @@
+ja:
+  activerecord:
+    models:
+      answer: 回答
+    attributes:
+      answer:
+        status: 出欠状況
+        reason: 理由
+        remarks: 備考

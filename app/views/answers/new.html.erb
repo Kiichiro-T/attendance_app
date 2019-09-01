@@ -1,0 +1,14 @@
+<% provide(:title, "回答") %>
+<% provide(:button_text, "回答") %>
+<% provide(:url, event_answers_path) %>
+<div class="row">
+  <aside class="col-md-6 col-md-offset-3">
+    <section class="answer_form">
+      <h1><%= @event.event_name %></h1> 
+      <% d = @event.date %>
+      <% wd = ["日", "月", "火", "水", "木", "金", "土"] %>
+      <p><%= d.strftime("%Y/%m/%d(#{wd[d.wday]})") %></p> 
+      <%= render 'shared/answer_form' %>
+    </section>
+  </aside>
+</div>

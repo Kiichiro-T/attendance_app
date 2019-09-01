@@ -1,13 +1,28 @@
+<% @answer = Answer.where(["event_id = ? and user_id = ?", event.id, current_user.id]) %>
 <li id="event-<%= event.id %>">
-  <span class="event_name"><%= link_to "イベント名：#{event.event_name}", event_path(event, url_token: event.url_token) %></span>
+  <span class="event_name">
+  <%= link_to "イベント名：#{event.event_name}", 
+                        event_answers_path(event_url_token: event.url_token) %>
+  </span>
   <% d = event.date %>
   <% wd = ["日", "月", "火", "水", "木", "金", "土"] %>
-  <span class="date">日時：<%= d.strftime("%Y/%m/%d(#{wd[d.wday]})") %></span>
-  <span class="memo">メモ：<%= event.memo %></span>
+  <span class="date">日付：<%= d.strftime("%Y/%m/%d(#{wd[d.wday]})") %></span>
+  <% if event.memo.present? %>
+    <span class="memo">
+      <%= link_to "イベント作成者のコメントがあります。", event_path(url_token: event.url_token) %>
+    </span>
+  <% end %>
   <span class="picture">
     <%= image_tag event.picture.url if event.picture? %>
   </span>
-  
+  <% if @answer.blank? %>
+    <span class="will_answer"><%= link_to "未回答", new_event_answer_path(event_url_token: event.url_token) %></span>
+  <% else %>
+    <span class="has_answered"><%= link_to "回答変更", edit_event_answer_path(id: @answer.ids , event_url_token: event.url_token) %></span>
+  <% end %>
+  <% if current_user.id == event.user_id %> 
+    <span class="event_edit"><%= link_to "イベント編集", edit_event_path(url_token: event.url_token) %></span>
+  <% end %>
   <span class="delete">
     <% if current_user?(event.user) %>
       <%= link_to "削除", event_path(event, url_token: event.url_token),

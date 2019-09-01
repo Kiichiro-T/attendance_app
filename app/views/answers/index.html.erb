@@ -1,0 +1,24 @@
+<% provide(:title, "#{@event.event_name}の回答結果") %>
+<div class="row">
+  <aside class="col-md-4">
+    <section class="event_info">
+      <h1>イベント名:  <%= @event.event_name %></h1>
+      <% d = @event.date %>
+      <% wd = ["日", "月", "火", "水", "木", "金", "土"] %>
+  　　<p>日付：<%= d.strftime("%Y/%m/%d(#{wd[d.wday]})") %></p>
+      <% if !@event.memo.nil? %>
+        <p>コメント：　<%= @event.memo %></p>
+      <% end %>
+      <p>作成者：　<%= @user.name %></p>
+    </section>
+  </aside>
+  <div class="col-md-8">
+    <% if @event.answers.any? %>
+      <h3>回答結果 (<%= @event.answers.count %>人 ○(<%= @s_1_count %>) △(<%= @s_2_count %>) ×(<%= @s_3_count %>))</h3>
+      <ol class="answers">
+        <%= render @answers %>
+      </ol>
+      <%= will_paginate @answers %>
+    <% end %>
+  </div>
+</div>
