@@ -60,6 +60,7 @@ GEM
       activemodel (>= 4.0.0)
       activesupport (>= 4.0.0)
       mime-types (>= 1.16)
+    clipboard-rails (1.7.1)
     coderay (1.1.2)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
@@ -116,7 +117,7 @@ GEM
       fog-xml (~> 0.1.1)
       ipaddress (~> 0.5)
       json (~> 2.0)
-    fog-aliyun (0.3.4)
+    fog-aliyun (0.3.5)
       fog-core
       fog-json
       ipaddress (~> 0.8)
@@ -225,7 +226,7 @@ GEM
     fog-voxel (0.1.0)
       fog-core
       fog-xml
-    fog-vsphere (3.2.0)
+    fog-vsphere (3.2.1)
       fog-core
       rbvmomi (>= 1.9, < 3)
     fog-xenserver (1.0.0)
@@ -236,6 +237,10 @@ GEM
       fog-core
       nokogiri (>= 1.5.11, < 2.0.0)
     formatador (0.2.5)
+    fullcalendar-rails (3.9.0.0)
+      jquery-rails (>= 4.0.5, < 5.0.0)
+      jquery-ui-rails (>= 5.0.2)
+      momentjs-rails (>= 2.9.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     guard (2.13.0)
@@ -260,10 +265,12 @@ GEM
     jbuilder (2.7.0)
       activesupport (>= 4.2.0)
       multi_json (>= 1.2)
-    jquery-rails (4.3.1)
+    jquery-rails (4.3.3)
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
+    jquery-ui-rails (6.0.1)
+      railties (>= 3.2.16)
     json (2.2.0)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
@@ -291,10 +298,12 @@ GEM
       builder
       minitest (>= 5.0)
       ruby-progressbar
+    momentjs-rails (2.20.1)
+      railties (>= 3.1)
     multi_json (1.13.1)
     nenv (0.3.0)
     netrc (0.11.0)
-    nio4r (2.4.0)
+    nio4r (2.5.1)
     nokogiri (1.10.4)
       mini_portile2 (~> 2.4.0)
     notiffany (0.1.3)
@@ -375,7 +384,7 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
-    sassc (2.1.0)
+    sassc (2.2.0)
       ffi (~> 1.9)
     shellany (0.0.1)
     spring (2.0.2)
@@ -426,17 +435,20 @@ DEPENDENCIES
   bootstrap-will_paginate (= 1.0.0)
   byebug (= 9.0.6)
   carrierwave (= 1.2.2)
+  clipboard-rails
   coffee-rails (= 4.2.2)
   faker (= 1.7.3)
   fog (= 1.42)
+  fullcalendar-rails
   guard (= 2.13.0)
   guard-minitest (= 2.4.4)
   jbuilder (= 2.7.0)
-  jquery-rails (= 4.3.1)
+  jquery-rails (= 4.3.3)
   listen (= 3.1.5)
   mini_magick (= 4.9.4)
   minitest (= 5.10.3)
   minitest-reporters (= 1.1.14)
+  momentjs-rails
   pg (= 0.20.0)
   public_uid
   puma (= 3.9.1)

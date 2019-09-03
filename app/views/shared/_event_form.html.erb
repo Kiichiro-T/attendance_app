@@ -8,8 +8,11 @@
       <%= f.label :event_name, "イベント名" %>
       <%= f.text_field :event_name, class: "form-control", placeholder: "例）練習・旅行・飲み会" %>
       
-      <%= f.label :date, "日付" %>
-      <%= f.date_field :date, class: "form-control" %>
+      <%= f.label :start_date, "開始日" %>
+      <%= f.date_field :start_date, class: "form-control" %>
+      
+      <%= f.label :end_date, "終了日" %>
+      <%= f.date_field :end_date, class: "form-control" %>
       
       <%= f.label :memo, "メモ" %>
       <%= f.text_area :memo, class: "form-control", placeholder: "例）集合時間・場所・持ち物・連絡先" %>

@@ -18,9 +18,11 @@ class UsersProfileTest < ActionDispatch::IntegrationTest
     assert_select 'div.pagination'
     @user.events.paginate(page: 1).each do |event|
       assert_match event.event_name, response.body
-      d = event.date
+      s_date = event.start_date
+      e_date = event.end_date
       wd = ["日", "月", "火", "水", "木", "金", "土"]
-      assert_match d.strftime("%Y/%m/%d(#{wd[d.wday]})"), response.body
+      assert_match s_date.strftime("%Y/%m/%d(#{wd[s_date.wday]})"), response.body
+      assert_match e_date.strftime("%Y/%m/%d(#{wd[e_date.wday]})"), response.body
     end
   end
 end

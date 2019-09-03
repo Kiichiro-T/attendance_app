@@ -15,7 +15,8 @@ class AnswersInterfaceTest < ActionDispatch::IntegrationTest
     get event_answers_path(event_url_token: @event1.url_token)
     assert_template 'answers/index'
     assert_match "イベント名: #{@event1.event_name}", response.body
-    assert_match "日付：", response.body
+    assert_match "開始日：", response.body
+    assert_match "終了日：", response.body
     assert_match "作成者： #{@user.name}", response.body
     assert_match @event1.answers.count.to_s, response.body
     assert_match "回答結果", response.body 

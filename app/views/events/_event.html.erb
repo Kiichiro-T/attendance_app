@@ -3,13 +3,16 @@
   <span class="event_name">
   <%= link_to "イベント名： #{event.event_name}", 
                         event_answers_path(event_url_token: event.url_token) %>
-  
+  <% unless current_user == event.user %>
   <%= link_to "イベント作成者： #{event.user.name}", 
                         user_path(id: event.user.id) %>
+  <% end %>
   </span>
-  <% d = event.date %>
+  <% s_date = event.start_date %>
+  <% e_date = event.end_date %>
   <% wd = ["日", "月", "火", "水", "木", "金", "土"] %>
-  <span class="date">日付：<%= d.strftime("%Y/%m/%d(#{wd[d.wday]})") %></span>
+  <p class="date">開始日：<%= s_date.strftime("%Y/%m/%d(#{wd[s_date.wday]})") %></p>
+  <p class="date">終了日：<%= e_date.strftime("%Y/%m/%d(#{wd[e_date.wday]})") %></>
   <% if event.memo.present? %>
     <span class="memo">
       <%= link_to "イベント作成者のコメントがあります。", event_path(url_token: event.url_token) %>
@@ -32,3 +35,5 @@
     <% end %>
   </span>
 </li>
+
+

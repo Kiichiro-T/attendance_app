@@ -11,14 +11,14 @@ Rails.application.routes.draw do
   get '/contact',   to: 'static_pages#contact'
   get '/signup',    to: 'users#new'
   post '/signup',   to: 'users#create'
-  patch '/update',  to: 'users#update'
   get '/login',     to: 'sessions#new'
   post '/login',    to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
+  get 'events/:url_token/url_copy',   to: 'events#url_copy', as: 'url_copy'
   resources :users
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update] 
   resources :events, param: :url_token do
-    resources :answers
+    resources :answers, only: [:index, :new, :create, :edit, :update]
   end
 end

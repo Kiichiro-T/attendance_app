@@ -1,20 +1,25 @@
 class EventsController < ApplicationController
   before_action :logged_in_user
   before_action :correct_user_event,   only: [:edit, :update, :destroy]
-  before_action :set_event,      only: :show
+  
+  def index
+    @answer = current_user.answers
+    @events = Event.where
+  end
+  
+  def show
+    @event = Event.find_by(url_token: params[:url_token])
+  end
   
   def new
     @event = Event.new  if logged_in?
   end
   
-  def show
-  end 
-  
   def create
     @event = Event.new(event_params)
     if @event.save
       flash[:success] = "イベントが作成されました"
-      redirect_to root_url
+      redirect_to url_copy_url(url_token: @event.url_token)
     else
       @feed_items = []
       render 'events/new'
@@ -27,9 +32,9 @@ class EventsController < ApplicationController
   def update
     if @event.update_attributes(event_params)
       flash[:success] = "イベントの編集に成功しました"
-      redirect_to event_answers_url(event_url_token: @event.url_token)
+      redirect_to url_copy_url(url_token: @event.url_token)
     else
-      render "events/edit"
+      render "edit"
     end
   end
   
@@ -39,10 +44,14 @@ class EventsController < ApplicationController
     redirect_to request.referrer || root_url
   end
   
+  def url_copy
+    @event = Event.find_by(url_token: params[:url_token])
+  end
+  
   private
     
     def event_params
-      params.require(:event).permit(:event_name, :date, :memo, :picture, :url_token, :user_id)
+      params.require(:event).permit(:event_name, :start_date, :end_date, :memo, :picture, :url_token, :user_id)
     end
     
     # ログイン中、本人しか操作できない
@@ -52,10 +61,6 @@ class EventsController < ApplicationController
         flash[:danger] = "不正な操作です"
         redirect_to root_url
       end
-    end
-    
-    def set_event
-      @event = Event.find_by(url_token: params[:url_token])
     end
     
     

@@ -29,11 +29,13 @@ User.create!(name:  "豊泉　喜一郎",
 
 40.times do |n|
   event_name = "練習#{n+1}"
-  date = (n+1).days.since.to_datetime
+  start_date = (n+1).days.since.to_datetime
+  end_date   = (n+1).days.since.to_datetime
   memo = "楽しみましょう"
   user = User.find_by(id: n+1)
   user.events.create!(event_name:  event_name,
-                      date:        date,
+                      start_date:  start_date,
+                      end_date:    end_date,
                       memo:        memo,
                       url_token:   SecureRandom.hex(10))
 

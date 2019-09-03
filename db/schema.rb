@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_28_082510) do
+ActiveRecord::Schema.define(version: 2019_09_03_063157) do
 
   create_table "answers", force: :cascade do |t|
     t.integer "status"
@@ -27,13 +27,14 @@ ActiveRecord::Schema.define(version: 2019_08_28_082510) do
 
   create_table "events", force: :cascade do |t|
     t.string "event_name"
-    t.datetime "date"
+    t.datetime "start_date"
     t.text "memo"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "picture"
     t.string "url_token"
+    t.datetime "end_date"
     t.index ["url_token"], name: "index_events_on_url_token", unique: true
     t.index ["user_id", "created_at"], name: "index_events_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_events_on_user_id"

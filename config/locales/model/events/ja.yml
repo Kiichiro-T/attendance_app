@@ -5,5 +5,7 @@ ja:
     attributes:
       event:
         event_name: イベント名
-        date: 日付
+        start_date: 開始日
+        end_date: 終了日
         memo: メモ 
+        picture: 写真

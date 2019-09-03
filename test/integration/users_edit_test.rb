@@ -18,7 +18,6 @@ class UsersEditTest < ActionDispatch::IntegrationTest
     assert_template 'users/edit'
     assert_select "div#error_explanation"
     assert_select "div.alert"
-    assert_select 'form[action="/update"]'
   end
   
   test "successfull edit with friendly forwarding" do

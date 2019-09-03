@@ -1,3 +1,5 @@
-<% d = @event.date %>
+<% s_date = @event.start_date %>
+<% e_date = @event.end_date %>
 <% wd = ["日", "月", "火", "水", "木", "金", "土"] %>
-<p>日付：<%= d.strftime("%Y/%m/%d(#{wd[d.wday]})") %></p>
+<p class="date">開始日：<%= s_date.strftime("%Y/%m/%d(#{wd[s_date.wday]})") %></p>
+<p class="date">終了日：<%= e_date.strftime("%Y/%m/%d(#{wd[e_date.wday]})") %></>

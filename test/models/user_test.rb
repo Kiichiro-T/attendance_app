@@ -81,7 +81,11 @@ class UserTest < ActiveSupport::TestCase
   
   test "associated events should be destroyed" do
     @user.save
-    @user.events.create!(event_name: "夏合宿", date: Time.zone.now, memo: "夏合宿は8/3~8/9です。", url_token: SecureRandom.hex(10))
+    @user.events.create!(event_name: "夏合宿", 
+                         start_date: 10.days.since.to_datetime, 
+                         end_date: 10.days.since.to_datetime, 
+                         memo: "夏合宿は8/3~8/9です。",
+                         url_token: SecureRandom.hex(10))
     assert_difference 'Event.count', -1 do
       @user.destroy
     end

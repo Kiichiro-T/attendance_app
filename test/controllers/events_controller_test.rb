@@ -10,11 +10,12 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     get new_event_path
     assert_redirected_to login_url
   end
-  
+    
   test "should redirect create when not logged in" do
     assert_no_difference 'Event.count' do
       post events_path, params: { event: { event_name: "example event",
-                                           date: 2.days.since.to_datetime,
+                                           start_date: 2.days.since.to_datetime,
+                                           end_date:   2.days.since.to_datetime,
                                            memo: "楽しみましょう！" } }
     end
     assert_redirected_to login_url
@@ -26,24 +27,22 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
   end
   
   test "should redirect update when not logged in" do
-    assert_no_difference 'Event.count' do
-      patch event_path(url_token: @event.url_token), 
-                          params: { event: { event_name: "example event",
-                                                   date: 2.days.since.to_datetime,
-                                                   memo: "楽しみましょう！" } }
-    end
+    patch event_path(url_token: @event.url_token), 
+                        params: { event: { event_name: "example event",
+                                                 start_date: 2.days.since.to_datetime,
+                                                 end_date:   2.days.since.to_datetime,
+                                                 memo: "楽しみましょう！" } }
     assert_redirected_to login_url
   end
   
   test "should redirect update for wrong event" do
     log_in_as(users(:user1))
     event = events(:event_user4)
-    assert_no_difference 'Event.count' do
-      patch event_path(url_token: event.url_token), 
-                                params: { event: { event_name: "example event",
-                                                         date: 2.days.since.to_datetime,
-                                                         memo: "楽しみましょう！" } }
-    end
+    patch event_path(url_token: event.url_token), 
+                              params: { event: { event_name: "example event",
+                                                       start_date: 2.days.since.to_datetime,
+                                                       end_date:   2.days.since.to_datetime,
+                                                       memo: "楽しみましょう！" } }
     assert_redirected_to root_url
   end
   

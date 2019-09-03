@@ -71,10 +71,14 @@ class User < ApplicationRecord
      reset_sent_at < 2.hours.ago
    end
    
-  def feed
-    Event.joins(:answers).where("answers.user_id = ?", id).order("events.date DESC")# .or(Event.where("user_id = ?", id)) ユーザー本人のはまだ表示されない
-    
-  end
+  #def feed
+    #Event.where("user_id = ?", id)
+    #scope = Event.joins(:answers)
+    # Event.joins(:answers).where("answers.user_id = ?", id).order("events.start_date DESC")# .or(Event.where("user_id = ?", id)) ユーザー本人のはまだ表示されない
+    #Event.joins(:answers).where("event.user_id = ?", id).or(Answer.where("answers.user_id = ?", id))
+    #scope.where("answers.user_id = ?", id).or(scope.where("events.user_id = ?", id))
+    #scope.where("events.user_id = ?", id).or(scope.where(id: Answer.where("answers.user_id = ?", id)))
+ # end
   
   private
     

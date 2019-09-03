@@ -1,0 +1,9 @@
+<h1>イベントを共有する</h1>
+<textarea class="text-right"  id="bar" readonly rows="1" wrap="off" style="overflow: overlay;">
+  <%= "#{new_event_answer_url(event_url_token: @event.url_token)}" %>
+</textarea>
+<button class="btn btn-secondary clipboard-btn" data-clipboard-action="copy" data-clipboard-target="#bar">
+  共有用のリンクをコピーする
+</button>
+
+<p><%#= link_to "回答する", new_event_answer_path(event_url_token: @event.url_token) %></p>

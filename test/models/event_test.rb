@@ -5,7 +5,8 @@ class EventTest < ActiveSupport::TestCase
   def setup
     @user = users(:user1)
     @event = @user.events.build(event_name: "夏合宿",
-                                date:       Date.today,
+                                start_date: 2.days.since.to_datetime,
+                                end_date: 2.days.since.to_datetime,
                                 memo:       "夏合宿は8/3~8/9です。",
                                 url_token:  SecureRandom.hex(10) )
   end
@@ -29,8 +30,13 @@ class EventTest < ActiveSupport::TestCase
     assert_not @event.valid?
   end
   
-  test "date should be present" do
-    @event.date = "   "
+  test "start date should be present" do
+    @event.start_date = "   "
+    assert_not @event.valid?
+  end
+  
+  test "end date should be present" do
+    @event.end_date = "   "
     assert_not @event.valid?
   end
   
