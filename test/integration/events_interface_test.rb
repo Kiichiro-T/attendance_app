@@ -49,8 +49,9 @@ class EventsInterfaceTest < ActionDispatch::IntegrationTest
   test "events edit and update" do
     log_in_as(@user)
     get root_url
-    assert_select 'a', text: "回答変更"
+    assert_select 'a', text: "イベント編集"
     get edit_event_path(url_token: @event.url_token)
+    assert_template 'events/edit'
     # 無効な送信
     patch event_path(url_token: @event.url_token), 
                         params: { event: { event_name: "",
@@ -58,25 +59,28 @@ class EventsInterfaceTest < ActionDispatch::IntegrationTest
                                                  memo: "a" * 1025 } }
 
     assert_select 'div#error_explanation'
-     # 有効な送信
+    # 有効な送信
     event_name = "旅行"
     date = 1001.days.since.to_datetime
     memo = "テニスラケットは不要です。"
     picture = fixture_file_upload('test/fixtures/rails.png', 'image/png')
     url_token = SecureRandom.hex(10)
+    user_id = @user.id
     patch event_path(url_token: @event.url_token), 
                         params: { event: { event_name: event_name,
                                                  date:       date,
                                                  memo:       memo,
                                               picture:    picture,
                                             url_token:  url_token,
-                                              user_id:    @user.id} }
+                                              user_id:    user_id} }
     @event.reload
     assert_not flash.empty?
     assert_redirected_to event_answers_url(event_url_token: @event.url_token)
     assert_equal event_name, @event.event_name
     #assert_equal date, @event.date
     assert_equal memo, @event.memo
+    assert_equal url_token, @event.url_token
+    assert_equal user_id, @event.user_id
     # 違うユーザーのプロフィールにアクセス（イベント編集リンクがないことを確認）
     get user_path(users(:user2))
     assert_select 'a', text: "イベント編集", count: 0

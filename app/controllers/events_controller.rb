@@ -26,7 +26,7 @@ class EventsController < ApplicationController
   
   def update
     if @event.update_attributes(event_params)
-      flash[:success] = "イベントの変更に成功しました"
+      flash[:success] = "イベントの編集に成功しました"
       redirect_to event_answers_url(event_url_token: @event.url_token)
     else
       render "events/edit"

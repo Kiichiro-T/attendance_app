@@ -1,8 +1,6 @@
 <h1>イベント名: <%= @event.event_name %></h1>
 <p>イベント作成者： <%= @event.user.name %></p>
-<% d = @event.date %>
-<% wd = ["日", "月", "火", "水", "木", "金", "土"] %>
-<p>日付：<%= d.strftime("%Y/%m/%d(#{wd[d.wday]})") %></p>
+<%= render 'shared/simple_date' %>
 <p>
   コメント：
   <span><%= @event.memo %></span>

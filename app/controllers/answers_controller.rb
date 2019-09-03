@@ -9,15 +9,14 @@ class AnswersController < ApplicationController
   end
   
   def new
-    @answer = Answer.new  if logged_in?
+    @answer = Answer.new
   end
   
   def create
     @answer = Answer.new(answer_params)
     if @answer.save
-      #@answer.update_attribute(:hasAnswered, true)
       flash[:success] = "回答できました"
-      redirect_to event_answers_path(event_url_token: @event.url_token)
+      redirect_to event_answers_url(event_url_token: @event.url_token)
     else
       render 'answers/new'
     end
@@ -60,7 +59,7 @@ class AnswersController < ApplicationController
     
     # ユーザーがログイン中ならばそのanswerを返す
     def correct_user_answer
-      @answer = current_user.answers.find_by(id: params[:id])
+      @answer = current_user.answers.find_by(id: params[:id], event_id: @event.id)
       if @answer.nil?
         flash[:danger] = "不正な操作です"
         redirect_to root_url
