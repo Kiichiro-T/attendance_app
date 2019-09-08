@@ -1,15 +1,19 @@
-<h3>未回答のイベント</h3>
 <% if @not_answered_event.any? %>
+  <h3>未回答のイベント</h3>
   <ol class="events">
     <%= render @not_answered_event %>
   </ol>
   <%= will_paginate @not_answered_event %>
 <% end %>
-<h3>回答済みのイベント</h3>
 <% if @answered_events.any? %>
+  <h3>回答済みのイベント</h3>
   <ol class="events">
     <%= render @answered_events %>
   </ol>
   <%= will_paginate @answered_events %>
+<% end %>
+<% if @not_answered_event.any? || @answered_events.any? %>
+<% else %>
+  <h3>まだイベントはありません</h3>
 <% end %>
   

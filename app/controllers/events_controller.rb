@@ -22,7 +22,7 @@ class EventsController < ApplicationController
       redirect_to url_copy_url(url_token: @event.url_token)
     else
       @feed_items = []
-      render 'events/new'
+      render 'new'
     end
   end
   
@@ -45,13 +45,14 @@ class EventsController < ApplicationController
   end
   
   def url_copy
-    @event = Event.find_by(url_token: params[:url_token])
+    @event  = Event.find_by(url_token: params[:url_token])
+    @answer = current_user.answers.find_by(event_id: @event.id)
   end
   
   private
     
     def event_params
-      params.require(:event).permit(:event_name, :start_date, :end_date, :memo, :picture, :url_token, :user_id)
+      params.require(:event).permit(:event_name, :start_date, :end_date, :memo, :picture, :url_token, :user_id, :group_id)
     end
     
     # ログイン中、本人しか操作できない

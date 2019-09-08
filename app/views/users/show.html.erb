@@ -8,10 +8,16 @@
         <%= @user.name %>
       </h1>
     </section>
+    <section class="groups">
+      <p>所属しているグループ一覧</p>
+      <% if @groups.any? %>
+        <%= render 'groups/group' %>
+      <% end %>
+    </section>
   </aside>
   <div class="col-md-8">
     <% if @user.events.any? %>
-      <h3>イベント (<%= @user.events.count %>)</h3>
+      <h3>作成したイベント (<%= @user.events.count %>)</h3>
       <ol class="events">
         <%= render @events %>
       </ol>
@@ -19,5 +25,3 @@
     <% end %>
   </div>
 </div>
-
-<div id="calendar"></div>

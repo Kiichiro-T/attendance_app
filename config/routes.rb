@@ -15,10 +15,20 @@ Rails.application.routes.draw do
   post '/login',    to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
   get 'events/:url_token/url_copy',   to: 'events#url_copy', as: 'url_copy'
-  resources :users
+  resources :users do
+    member do
+      get :following
+    end
+  end
+  resources :groups do
+    member do
+      get :followers
+    end
+  end
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update] 
   resources :events, param: :url_token do
     resources :answers, only: [:index, :new, :create, :edit, :update]
   end
+  resources :relationships,       only: [:create, :destroy]
 end

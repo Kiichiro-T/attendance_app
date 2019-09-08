@@ -1,3 +1,7 @@
 <h1><%= @event.event_name %></h1>
 <%= render 'shared/simple_date' %>
-<p>コメント： <%= @event.memo %></p>
+<% if @event.memo.empty? %>
+  <p>コメント： なし</p>
+<% else %>
+  <p>コメント： <%= @event.memo %></p>
+<% end %>

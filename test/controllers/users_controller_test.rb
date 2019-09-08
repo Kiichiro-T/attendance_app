@@ -70,4 +70,17 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     end
     assert_redirected_to root_url
   end
+  
+  test "should redirect following when not logged in" do
+    get following_user_path(@user)
+    assert_redirected_to login_url
+  end
+  
+  test "should redirect followin when logged in as wrong user" do
+    log_in_as(@other_user)
+    get following_user_path(@user)
+    assert_redirected_to root_url
+  end
+    
+  
 end

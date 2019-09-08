@@ -1,0 +1,21 @@
+group1:
+  name: テニスクラブ1
+  explanation: テニスクラブ1です。
+  user: user2
+  
+group2:
+  name: テニスクラブ2
+  explanation: テニスクラブ2です。
+  user: user1
+
+group3:
+  name: テニスクラブ3
+  explanation: テニスクラブ3です。
+  user: user1
+  
+<% 30.times do |n| %>
+group<%= n+4 %>:
+  name: テニスクラブ<%= n+4 %>
+  explanation: テニスクラブ<%= n+4 %>です。
+  user: user<%= 4 %>
+<% end %>

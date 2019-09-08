@@ -7,6 +7,7 @@ class UserTest < ActiveSupport::TestCase
                      password: "password", password_confirmation: "password")
     @user1  = users(:user1)
     @event1 = events(:event_user1)
+    @group = groups(:group1)
   end
   
   test "should be valid" do
@@ -83,11 +84,47 @@ class UserTest < ActiveSupport::TestCase
     @user.save
     @user.events.create!(event_name: "夏合宿", 
                          start_date: 10.days.since.to_datetime, 
-                         end_date: 10.days.since.to_datetime, 
+                         end_date:   10.days.since.to_datetime, 
                          memo: "夏合宿は8/3~8/9です。",
-                         url_token: SecureRandom.hex(10))
+                         url_token: SecureRandom.hex(10),
+                         group_id: @group.id)
     assert_difference 'Event.count', -1 do
       @user.destroy
     end
   end
+  
+  test "should follow and unfollow a group" do
+    user  = users(:user1)
+    group = groups(:group1)
+    assert_not user.following?(group)
+    user.follow(group)
+    assert user.following?(group)
+    assert group.followers.include?(user)
+    user.unfollow(group)
+    assert_not user.following?(group)
+  end
+
+=begin
+  test "feed should have the right events" do
+    user  = users(:user1)
+    group1 = groups(:group1)
+    group2 = groups(:group2)
+    # フォローしているユーザーのイベントを確認
+    group2.followers.each do |user_following|
+      user_following.events.each do |event_following|
+        assert user.feed.include?(event_following)
+      end
+    end
+    # 自分自身のイベントを確認
+    user.events.each do |event_self|
+      assert user.feed.include?(post_self)
+    end
+    # フォローしていないユーザーのイベントを確認
+    group1.followers.each do |user_unfollowed|
+      user_unfollowed.events.each do |event_unfollowed|
+        assert_not user.feed.include?(post_unfollowed)
+      end
+    end
+  end
+=end
 end

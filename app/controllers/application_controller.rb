@@ -12,4 +12,13 @@ class ApplicationController < ActionController::Base
         redirect_to login_url
       end
     end
+    
+    # グループに所属しているかどうか確認、所属していたらtrue
+    def belong_to_group
+      group = Group.find(params[:id])
+      unless current_user.following?(group)
+        flash[:danger] = "フォローしていないグループにはアクセスできません"
+        redirect_to root_url
+      end
+    end
 end

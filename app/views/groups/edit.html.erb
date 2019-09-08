@@ -1,0 +1,11 @@
+<% provide(:title, "グループ設定") %>
+<% provide(:url, group_path(id: @group.id)) %>
+<% provide(:button_text, "変更") %>
+
+<h1>グループ設定</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= render 'shared/group_form' %>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+<% provide(:title, @group.name) %>
+<h1><%= @group.name %></h1>
+<div class="row">
+  <aside class="col-md-4">
+    <section class="group_info">
+      <% if current_user.following?(@group) %>
+        <p>所属： <b id="followers"><%=link_to "#{@group.followers.count}人", followers_group_path(@group) %></b></p>
+      <% else %>
+        <p>所属： <b id="followers"><%= "#{@group.followers.count}人" %></b></p>
+      <% end %>
+      <p>グループの説明： <%= @group.explanation %></p>
+      <p>グループ作成者： <%= @user.name %></p>
+      <% if current_user.id == @group.user_id %>
+        <p><%= link_to "グループ編集", edit_group_path(@group) %></p>
+      <% end %>
+      <%= render 'shared/follow_form' %>
+    </section>
+  </aside>
+<div class="col-md-8">
+  <div class="events">
+  <% if @users.any? %>
+      <% if @events.any? %>
+        <h2><%= @group.name %>のイベント一覧</h2>
+        <%= render @events %>
+      <% else %>
+        <h2>まだイベントはありません</h2>
+      <% end %>
+  <% end %>
+  </div>
+</div>

@@ -1,7 +1,8 @@
 <% @answer = Answer.where(["event_id = ? and user_id = ?", event.id, current_user.id]) %>
+<% @group  = Group.find(event.group_id) %>
 <li id="event-<%= event.id %>">
   <span class="event_name">
-  <%= link_to "イベント名： #{event.event_name}", 
+  <%= link_to "イベント名： #{event.event_name}（#{@group.name}）", 
                         event_answers_path(event_url_token: event.url_token) %>
   <% unless current_user == event.user %>
   <%= link_to "イベント作成者： #{event.user.name}", 
@@ -11,11 +12,11 @@
   <% s_date = event.start_date %>
   <% e_date = event.end_date %>
   <% wd = ["日", "月", "火", "水", "木", "金", "土"] %>
-  <p class="date">開始日：<%= s_date.strftime("%Y/%m/%d(#{wd[s_date.wday]})") %></p>
-  <p class="date">終了日：<%= e_date.strftime("%Y/%m/%d(#{wd[e_date.wday]})") %></>
+  <span class="date">開始日：<%= s_date.strftime("%Y/%m/%d(#{wd[s_date.wday]})") %></span>
+  <span class="date">終了日：<%= e_date.strftime("%Y/%m/%d(#{wd[e_date.wday]})") %></span>
   <% if event.memo.present? %>
     <span class="memo">
-      <%= link_to "イベント作成者のコメントがあります。", event_path(url_token: event.url_token) %>
+      <%= link_to "イベント作成者のコメントがあります。", event_answers_path(event_url_token: event.url_token) %>
     </span>
   <% end %>
   <span class="picture">

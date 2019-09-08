@@ -1,5 +1,6 @@
 class Event < ApplicationRecord
   belongs_to :user #optional: true
+  belongs_to :group
   has_many :answers, dependent: :destroy
   has_many :answer_users, through: :answers, source: :user
   #attribute :url_token, :string, default: SecureRandom.hex(10)
@@ -12,6 +13,7 @@ class Event < ApplicationRecord
   validates :user_id, presence: true
   validates :url_token, presence: true, uniqueness: true
   validate  :picture_size
+  validates :group_id, presence: true
   
   # eventモデルのidをランダムなものとする
   def to_param

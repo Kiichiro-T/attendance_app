@@ -7,6 +7,7 @@ event_user1:
   created_at: <%= Time.new(2019, 8, 2).to_datetime %>
   url_token: <%= SecureRandom.hex(10) %>
   user: user1
+  group: group2
 
 event_user2:
   event_name: "春合宿"
@@ -16,6 +17,7 @@ event_user2:
   created_at: <%= Time.new(2019, 2, 6).to_datetime %>
   url_token: <%= SecureRandom.hex(10) %>
   user: user2
+  group: group1
   
 event_user3:
   event_name: "テスト"
@@ -25,6 +27,7 @@ event_user3:
   created_at: <%= 10.minutes.ago.to_datetime %>
   url_token: <%= SecureRandom.hex(10) %>
   user: user3
+  group: group1
   
 event_user4:
   event_name: "秋合宿"
@@ -33,7 +36,8 @@ event_user4:
   memo: "秋合宿は5日間です。"
   created_at: <%= Time.new(2018, 11, 15).to_datetime %>
   url_token: <%= SecureRandom.hex(10) %>
-  user: user4
+  user: user1
+  group: group2
   
 <% 30.times do |n| %>
 event_user<%= n+5 %>:
@@ -44,4 +48,5 @@ event_user<%= n+5 %>:
   created_at: <%= (n+6).days.ago.to_datetime %>
   url_token: <%= SecureRandom.hex(10) %>
   user: user1
+  group: group2
 <% end %>

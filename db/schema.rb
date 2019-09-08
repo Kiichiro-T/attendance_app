@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_03_063157) do
+ActiveRecord::Schema.define(version: 2019_09_04_004930) do
 
   create_table "answers", force: :cascade do |t|
     t.integer "status"
@@ -30,14 +30,36 @@ ActiveRecord::Schema.define(version: 2019_09_03_063157) do
     t.datetime "start_date"
     t.text "memo"
     t.integer "user_id"
+    t.integer "group_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "picture"
     t.string "url_token"
     t.datetime "end_date"
+    t.index ["group_id"], name: "index_events_on_group_id"
     t.index ["url_token"], name: "index_events_on_url_token", unique: true
-    t.index ["user_id", "created_at"], name: "index_events_on_user_id_and_created_at"
+    t.index ["user_id", "group_id", "created_at"], name: "index_events_on_user_id_and_group_id_and_created_at"
     t.index ["user_id"], name: "index_events_on_user_id"
+  end
+
+  create_table "groups", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "explanation"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "created_at"], name: "index_groups_on_user_id_and_created_at"
+    t.index ["user_id"], name: "index_groups_on_user_id"
+  end
+
+  create_table "relationships", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_relationships_on_group_id"
+    t.index ["user_id", "group_id"], name: "index_relationships_on_user_id_and_group_id", unique: true
+    t.index ["user_id"], name: "index_relationships_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

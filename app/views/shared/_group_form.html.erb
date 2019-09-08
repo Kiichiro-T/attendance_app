@@ -1,0 +1,13 @@
+<%= form_for(@group, url: yield(:url)) do |f| %> <%#フォーム内容の送信先を設定%>
+      <%= render 'shared/error_messages', object: f.object%>
+      
+      <%= f.hidden_field :user_id, :value => current_user.id %> 
+      
+      <%= f.label :name, "名前" %>
+      <%= f.text_field :name, class: "form-control" %>
+      
+      <%= f.label :explanation, "グループの説明" %>
+      <%= f.text_field :explanation, class: "form-control" %>
+      
+      <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+<% end %>

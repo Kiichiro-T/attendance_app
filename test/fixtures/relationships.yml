@@ -1,0 +1,15 @@
+one:
+  user: user1
+  group: group2
+
+two:
+  user: user1
+  group: group3
+
+three:
+  user: user2
+  group: group1
+
+four:
+  user: user3
+  group: group1

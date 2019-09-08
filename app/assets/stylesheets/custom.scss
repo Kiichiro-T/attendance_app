@@ -16,6 +16,7 @@ $light-gray: #777;
   display: block;
   margin-left: 60px;
   font-size: 1.2em;
+  
 }
 
 /* universal */
@@ -249,6 +250,9 @@ aside {
   }
 }
 
+/* event_info */
+
+
 /* answers */
 
 .answers {
@@ -293,3 +297,20 @@ aside {
     margin-bottom: 5px;
   }
  }
+ 
+/* groups */
+
+.groups {
+  list-style: none;
+  padding: 0;
+  li {
+    padding: 10px 0;
+    
+  }
+  .group {
+    display: block;
+    font-size: 1.5em;
+  }
+}
+
+ 

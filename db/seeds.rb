@@ -1,4 +1,5 @@
 require "date"
+# ユーザー
 User.create!(name:  "Example User",
              email: "example@railstutorial.org",
              password:              "foobar",
@@ -27,20 +28,47 @@ User.create!(name:  "豊泉　喜一郎",
              activated: true,
              activated_at: 2.minutes.ago.to_datetime)
 
+# グループ
+users = User.order(:created_at).take(6)
+40.times do |n|
+  name = "テニスクラブ#{n+1}"
+  explanation = "テニスクラブ#{n+1}です"
+  users.each do |user|
+    Group.create!(name:  name,
+                  explanation: explanation,
+                  user_id: user.id)
+  end
+end
+
+
+
+# リレーションシップ
+groups = Group.all
+users  = User.all
+user   = users.first
+following = groups[3..30]
+#followers = users[2..40]
+following.each { |followed| user.follow(followed) }
+#followers.each { |follower| follower.follow(user) }
+
+# イベント
 40.times do |n|
   event_name = "練習#{n+1}"
   start_date = (n+1).days.since.to_datetime
   end_date   = (n+1).days.since.to_datetime
-  memo = "楽しみましょう"
-  user = User.find_by(id: n+1)
+  memo  = "楽しみましょう"
+  user  = User.find_by(id: n+1)
+  group = Group.find_by(id: n+1)
   user.events.create!(event_name:  event_name,
                       start_date:  start_date,
                       end_date:    end_date,
                       memo:        memo,
-                      url_token:   SecureRandom.hex(10))
+                      url_token:   SecureRandom.hex(10),
+                      group_id:    group.id)
 
 end
 
+# 回答
 users = User.order(:created_at).take(6)
 40.times do |n|
   x = n.modulo(3)

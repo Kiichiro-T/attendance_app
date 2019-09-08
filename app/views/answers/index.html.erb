@@ -1,13 +1,15 @@
 <% provide(:title, "#{@event.event_name}の回答結果") %>
+<h1 class="event-name"><%= @event.event_name %></h1>
+<% if current_user.id == @event.user_id %>
 <div class="row">
   <aside class="col-md-4">
     <section class="event_info">
-      <h1>イベント名: <%= @event.event_name %></h1>
       <%= render 'shared/simple_date' %>
-      <% if !@event.memo.nil? %>
+      <% unless @event.memo.blank? %>
         <p>コメント： <%= @event.memo %></p>
       <% end %>
       <p>作成者： <%= @user.name %></p>
+      <p>グループ： <%= @group.name %></p> 
     </section>
   </aside>
   <div class="col-md-8">
@@ -17,6 +19,21 @@
         <%= render @answers %>
       </ol>
       <%= will_paginate @answers %>
+    <% else %>
+      <h3>回答結果</h3>
+      <p>回答者はまだいません</p>
     <% end %>
   </div>
 </div>
+<% else %>
+  <aside class="col-md-4">
+    <section class="event_info">
+      <%= render 'shared/simple_date' %>
+      <% unless @event.memo.blank? %>
+        <p>コメント： <%= @event.memo %></p>
+      <% end %>
+      <p>作成者： <%= @user.name %></p>
+      <p>グループ： <%= @group.name %></p> 
+    </section>
+  </aside>
+<% end %>

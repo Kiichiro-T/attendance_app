@@ -5,7 +5,8 @@ class AnswersController < ApplicationController
   before_action :correct_user_answer, only: [:edit, :update]
   
   def index
-    @user = User.find_by(id: @event.user_id)
+    @user  = User.find_by(id: @event.user_id)
+    @group = Group.find(@event.group_id)
   end
   
   def new
@@ -46,14 +47,16 @@ class AnswersController < ApplicationController
     
     # 各statusの数を返す
     def status_count
-      @answers = @event.answers.paginate(page: params[:page])
-      if @answers
-        status_1 = @answers.where("status = ?", 1)
-        status_2 = @answers.where("status = ?", 2)
-        status_3 = @answers.where("status = ?", 3)
-        @s_1_count = status_1.present? ? status_1.count : "0"
-        @s_2_count = status_2.present? ? status_2.count : "0"
-        @s_3_count = status_3.present? ? status_3.count : "0"
+      if @event
+       @answers = @event.answers.paginate(page: params[:page])
+        if @answers
+          status_1 = @answers.where("status = ?", 1)
+          status_2 = @answers.where("status = ?", 2)
+          status_3 = @answers.where("status = ?", 3)
+          @s_1_count = status_1.present? ? status_1.count : "0"
+          @s_2_count = status_2.present? ? status_2.count : "0"
+          @s_3_count = status_3.present? ? status_3.count : "0"
+        end
       end
     end
     

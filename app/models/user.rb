@@ -2,6 +2,10 @@ class User < ApplicationRecord
   has_many :events,  dependent: :destroy
   has_many :answers, dependent: :destroy
   has_many :answer_events, through: :answers, source: :event
+  has_many :active_relationships,  class_name: "Relationship",
+                                   foreign_key: "user_id",
+                                   dependent: :destroy
+  has_many :following, through: :active_relationships,  source: :group
   attr_accessor :remember_token, :activation_token, :reset_token
   before_save   :downcase_email
   before_create :create_activation_digest
@@ -71,14 +75,31 @@ class User < ApplicationRecord
      reset_sent_at < 2.hours.ago
    end
    
-  #def feed
+  def feed
     #Event.where("user_id = ?", id)
     #scope = Event.joins(:answers)
     # Event.joins(:answers).where("answers.user_id = ?", id).order("events.start_date DESC")# .or(Event.where("user_id = ?", id)) ユーザー本人のはまだ表示されない
     #Event.joins(:answers).where("event.user_id = ?", id).or(Answer.where("answers.user_id = ?", id))
     #scope.where("answers.user_id = ?", id).or(scope.where("events.user_id = ?", id))
     #scope.where("events.user_id = ?", id).or(scope.where(id: Answer.where("answers.user_id = ?", id)))
- # end
+    #scope = Event.joins(:active_relationships)
+    #scope.where("active_relationships.group_id = ?" id)
+  end
+ 
+  # ユーザーをフォローする
+    def follow(group)
+      following << group
+    end
+
+    # ユーザーをフォロー解除する
+    def unfollow(group)
+      active_relationships.find_by(group_id: group.id).destroy
+    end
+
+    # 現在のユーザーがフォローしてたらtrueを返す
+    def following?(group)
+      following.include?(group)
+    end
   
   private
     

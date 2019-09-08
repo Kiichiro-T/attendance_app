@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
-  before_action :correct_user,   only: [:edit, :update]
+  before_action :logged_in_user, only: [:index, :edit, :update, :destroy, :following]
+  before_action :correct_user,   only: [:edit, :update, :following]
   before_action :admin_user,     only: [:destroy]
     
   def index
@@ -13,6 +13,7 @@ class UsersController < ApplicationController
     @events.each do |event|
       @answer = Answer.where(["event_id = ? and user_id = ?", event.id, event.user_id])
     end
+    @groups = @user.following
     redirect_to root_url and return unless @user.activated?
   end
   
@@ -45,8 +46,15 @@ class UsersController < ApplicationController
   
   def destroy
     @user = User.find(params[:id]).destroy
-    flash[:success] = "ユーザーは消去されました"
+    flash[:success] = "ユーザーは削除されました"
     redirect_to users_url
+  end
+  
+  def following
+    @title = "フォロー"
+    @groups = @user.following
+    @groups_p = @groups.paginate(page: params[:page])
+    render 'users/show_follow'
   end
   
   private

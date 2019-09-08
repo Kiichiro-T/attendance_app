@@ -5,6 +5,7 @@ class EventsInterfaceTest < ActionDispatch::IntegrationTest
   def setup
     @user = users(:user1)
     @event = @user.events.paginate(page: 1).first
+    @group = groups(:group2)
   end
   
   test "events new, create and destroy" do
@@ -34,7 +35,8 @@ class EventsInterfaceTest < ActionDispatch::IntegrationTest
                                            memo:       memo,
                                            picture:    picture,
                                            url_token:  url_token,
-                                           user_id:    @user.id} }
+                                           user_id:    @user.id,
+                                           group_id:   @group.id} }
     end
     assert_redirected_to url_copy_url(url_token: url_token)
     follow_redirect!
@@ -80,7 +82,8 @@ class EventsInterfaceTest < ActionDispatch::IntegrationTest
                                                  memo:       memo,
                                               picture:    picture,
                                             url_token:  url_token,
-                                              user_id:    user_id} }
+                                              user_id:    user_id,
+                                              group_id:   @group.id} }
     @event.reload
     assert_not flash.empty?
     assert_redirected_to url_copy_url(url_token: url_token)

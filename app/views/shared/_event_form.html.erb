@@ -16,6 +16,15 @@
       
       <%= f.label :memo, "メモ" %>
       <%= f.text_area :memo, class: "form-control", placeholder: "例）集合時間・場所・持ち物・連絡先" %>
+      
+      <%= f.label :group_id, "グループ名" %>
+      <%= f.select :group_id,
+            options_from_collection_for_select(current_user.following, :id, :name),
+              { 
+                class: "form-control", :prompt => "選択してください"
+              } 
+      %>
+      
       </div>
       
       <%= f.submit yield(:button_text), class: "btn btn-primary" %>

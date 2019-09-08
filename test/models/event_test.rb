@@ -3,12 +3,14 @@ require 'test_helper'
 class EventTest < ActiveSupport::TestCase
   
   def setup
-    @user = users(:user1)
+    @user  = users(:user1)
+    @group = groups(:group1)
     @event = @user.events.build(event_name: "夏合宿",
                                 start_date: 2.days.since.to_datetime,
-                                end_date: 2.days.since.to_datetime,
+                                end_date:   3.days.since.to_datetime,
                                 memo:       "夏合宿は8/3~8/9です。",
-                                url_token:  SecureRandom.hex(10) )
+                                url_token:  SecureRandom.hex(10),
+                                group_id:   @group.id)
   end
   
   test "should be valid" do
@@ -17,6 +19,11 @@ class EventTest < ActiveSupport::TestCase
 
   test "user id should be present" do
     @event.user_id = nil
+    assert_not @event.valid?
+  end
+  
+  test "group id should be present" do
+    @event.group_id = nil
     assert_not @event.valid?
   end
   
@@ -59,13 +66,5 @@ class EventTest < ActiveSupport::TestCase
     duplicate_event.url_token = @event.url_token
     @event.save
     assert_not duplicate_event.valid?
-  end
-  
-  test "associated answers should be destroyed" do
-    @event.save
-    @event.answers.create!(status: 1, user_id: @event.user.id)
-    assert_difference 'Answer.count', -1 do
-      @event.destroy
-    end
   end
 end

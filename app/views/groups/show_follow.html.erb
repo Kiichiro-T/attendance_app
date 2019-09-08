@@ -1,0 +1,18 @@
+<% provide(:title, @title) %>
+<div class="row">
+  <aside class="col-md-4">
+    <section class="group_info">
+      <h1><%= link_to @group.name , group_path(@group) %></h1>
+      <span><b>所属人数:</b> <%= @users.count %>人</span>
+    </section>
+  </aside>
+  <div class="col-md-8">
+    <h3><%= @title %></h3>
+    <% if @users_p.any? %>
+      <ul class="users follow">
+        <%= render @users_p %>
+      </ul>
+      <%= will_paginate @users_p %>
+    <% end %>
+  </div>
+</div>

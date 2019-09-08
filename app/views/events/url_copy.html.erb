@@ -6,4 +6,8 @@
   共有用のリンクをコピーする
 </button>
 
-<p><%#= link_to "回答する", new_event_answer_path(event_url_token: @event.url_token) %></p>
+<% if @answer %>
+  <p><%= link_to "回答を変更する", edit_event_answer_path(event_url_token: @event.url_token, id: @answer.id) %></p>
+<% else %>
+  <p><%= link_to "回答する", new_event_answer_path(event_url_token: @event.url_token) %></p>
+<% end %>

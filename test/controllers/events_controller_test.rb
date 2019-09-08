@@ -3,7 +3,9 @@ require 'test_helper'
 class EventsControllerTest < ActionDispatch::IntegrationTest
   
   def setup
-    @event = events(:event_user1)
+    @user   = users(:user1)
+    @event  = events(:event_user1)
+    @event2 = events(:event_user2)
   end
   
   test "should redirect new when not logged in" do
@@ -36,13 +38,14 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
   end
   
   test "should redirect update for wrong event" do
-    log_in_as(users(:user1))
-    event = events(:event_user4)
-    patch event_path(url_token: event.url_token), 
+    log_in_as(@user)
+    patch event_path(url_token: @event2.url_token), 
                               params: { event: { event_name: "example event",
-                                                       start_date: 2.days.since.to_datetime,
-                                                       end_date:   2.days.since.to_datetime,
-                                                       memo: "楽しみましょう！" } }
+                                                      start_date: 2.days.since.to_datetime,
+                                                      end_date:   2.days.since.to_datetime,
+                                                      memo: "楽しみましょう！",
+                                                      url_token: @event2.url_token,
+                                                      group_id: 1} }
     assert_redirected_to root_url
   end
   
@@ -54,10 +57,9 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
   end
   
   test "should redirect destroy for wrong event" do
-    log_in_as(users(:user1))
-    event = events(:event_user4)
+    log_in_as(@user)
     assert_no_difference 'Event.count' do
-      delete event_path(url_token: event.url_token)
+      delete event_path(url_token: @event2.url_token)
     end
     assert_redirected_to root_url
   end
